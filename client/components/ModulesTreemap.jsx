@@ -92,7 +92,7 @@ export default class ModulesTreemap extends Component {
                   <div key={chunk.cid} className={s.foundModulesChunk}>
                     <div className={s.foundModulesChunkName}
                       onClick={() => this.treemap.zoomToGroup(chunk)}>
-                      {chunk.label}
+                      {this.chunkLabel(chunk.label)}
                     </div>
                     <ModulesList className={s.foundModulesList}
                       modules={modules}
@@ -151,13 +151,14 @@ export default class ModulesTreemap extends Component {
 
   renderChunkItemLabel = item => {
     const isAllItem = (item === CheckboxList.ALL_ITEM);
-    const label = isAllItem ? 'All' : item.label;
+    const label = isAllItem ? 'All' : this.chunkLabel(item.label);
     const size = isAllItem ? store.totalChunksSize : item[store.activeSize];
 
     return [
-      `${label} (`,
+      <span>{label}</span>,
+      <span> (</span>,
       <strong>{filesize(size)}</strong>,
-      ')'
+      <span>)</span>
     ];
   };
 
@@ -299,6 +300,13 @@ export default class ModulesTreemap extends Component {
       x: event.pageX,
       y: event.pageY
     });
+  }
+
+  chunkLabel(label) {
+    return String(label)
+      .split('/')
+      .filter(s => s !== 'js' && !s.startsWith('__uncompressed'))
+      .join('/');
   }
 
   isModuleVisible = module => (

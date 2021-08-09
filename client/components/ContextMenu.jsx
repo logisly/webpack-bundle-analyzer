@@ -37,6 +37,11 @@ export default class ContextMenu extends PureComponent {
           Hide all other chunks
         </ContextMenuItem>
         <hr/>
+        <ContextMenuItem disabled={!multipleChunksSelected}
+          onClick={this.handleGoToAsset}>
+          Open Asset
+        </ContextMenuItem>
+        <hr/>
         <ContextMenuItem disabled={store.allChunksSelected}
           onClick={this.handleClickShowAllChunks}>
           Show all chunks
@@ -65,6 +70,12 @@ export default class ContextMenu extends PureComponent {
 
   handleClickShowAllChunks = () => {
     store.selectedChunks = store.allChunks;
+    this.hide();
+  }
+
+  handleGoToAsset = () => {
+    const {chunk: selectedChunk} = this.props;
+    window.open(`/webpack/${selectedChunk.label}`, '_blank');
     this.hide();
   }
 

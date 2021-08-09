@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "gulp watch",
-    "build": "gulp build && brotli public/viewer.js -o public/viewer-$(shasum public/viewer.js | cut -c 1-8).js",
+    "build": "gulp build && brotli public/viewer.js -o public/viewer-$(shasum public/viewer.js | cut -c 1-8).js && aws s3 cp ./public/viewer-$(shasum public/viewer.js | cut -c 1-8).js s3://logisly-assets/common/bundle-stats-viewer/viewer-$(shasum public/viewer.js | cut -c 1-8).js --acl public-read --content-type application/javascript --content-encoding br --cache-control \"public, max-age=1209600\"",
     "npm-publish": "npm run lint && npm run build && npm test && npm publish",
     "lint": "eslint --ext js,jsx .",
     "install-test-webpack-versions": "./bin/install-test-webpack-versions.sh",
