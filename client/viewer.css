@@ -1,5 +1,5 @@
 :root {
-  --main-font: normal 11px Verdana, sans-serif;
+  --main-font: monospace;
 }
 
 :global html,

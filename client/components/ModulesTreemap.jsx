@@ -34,7 +34,7 @@ export default class ModulesTreemap extends Component {
   state = {
     selectedChunk: null,
     selectedMouseCoords: {x: 0, y: 0},
-    sidebarPinned: false,
+    sidebarPinned: true,
     showChunkContextMenu: false,
     showTooltip: false,
     tooltipContent: null

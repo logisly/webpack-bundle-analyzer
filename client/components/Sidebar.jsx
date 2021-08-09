@@ -9,7 +9,7 @@ const toggleTime = parseInt(s.toggleTime);
 
 export default class Sidebar extends Component {
   static defaultProps = {
-    pinned: false,
+    pinned: true,
     position: 'left'
   };
 
@@ -22,12 +22,7 @@ export default class Sidebar extends Component {
     renderContent: true
   };
 
-  componentDidMount() {
-    this.hideTimeoutId = setTimeout(() => this.toggleVisibility(false), 3000);
-  }
-
   componentWillUnmount() {
-    clearTimeout(this.hideTimeoutId);
     clearTimeout(this.hideContentTimeout);
   }
 

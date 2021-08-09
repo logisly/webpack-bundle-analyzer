@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "gulp watch",
-    "build": "gulp build",
+    "build": "gulp build && brotli public/viewer.js -o public/viewer-$(shasum public/viewer.js | cut -c 1-8).js",
     "npm-publish": "npm run lint && npm run build && npm test && npm publish",
     "lint": "eslint --ext js,jsx .",
     "install-test-webpack-versions": "./bin/install-test-webpack-versions.sh",
